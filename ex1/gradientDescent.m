@@ -18,24 +18,24 @@ for iter = 1:num_iters
     %
 
     % == Option 1: Iterative ==
-    % data0 = 0;
-    % for i = 1:m
-    %   data0 = data0 + theta(1)*X(i, 1) + theta(2)*X(i, 2) - y(i);
-    % end
-    % data0 = 1/m * data0;
     % data1 = 0;
     % for i = 1:m
-    %   data1 = data1 + (theta(1)*X(i, 1) + theta(2)*X(i, 2) - y(i))*X(i, 2);
+    %   data1 = data1 + theta(1)*X(i, 1) + theta(2)*X(i, 2) - y(i);
     % end
-    % data1 = 1/m * data1;
-    % theta(1) = theta(1) - alpha*data0;
-    % theta(2) = theta(2) - alpha*data1;
+    % data1 = 1/m * data0;
+    % data2 = 0;
+    % for i = 1:m
+    %   data2 = data2 + (theta(1)*X(i, 1) + theta(2)*X(i, 2) - y(i))*X(i, 2);
+    % end
+    % data2 = 1/m * data2;
+    % theta(1) = theta(1) - alpha*data1;
+    % theta(2) = theta(2) - alpha*data2;
 
     % == Option 2: Vectorized (faster) ==
-    data0 = 1/m * sum(X*theta - y);
-    data1 = 1/m * sum((X*theta - y).*X(:, 2));
-    theta(1) = theta(1) - alpha*data0;
-    theta(2) = theta(2) - alpha*data1;
+    data1 = 1/m * sum(X*theta - y);
+    data2 = 1/m * sum((X*theta - y).*X(:, 2));
+    theta(1) = theta(1) - alpha*data1;
+    theta(2) = theta(2) - alpha*data2;
 
     % ============================================================
 
