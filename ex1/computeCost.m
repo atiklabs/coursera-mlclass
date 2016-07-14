@@ -13,10 +13,16 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
-for i = 1:m;
-  J = J + (theta(1)*X(i, 1) + theta(2)*X(i, 2) - y(i))^2;
-end;
-J = 1/(2*m) * J;
+% === Option 1: Iterative ===
+% for i = 1:m;
+%   J = J + (theta(1)*X(i, 1) + theta(2)*X(i, 2) - y(i))^2;
+% end;
+% J = 1/(2*m) * J;
+
+% === Option 2: Vectorized (faster) ===
+predictions = X*theta; % predictions of hypothesis on all m examples
+sqrErrors = (predictions-y).^2; % squared errors
+J = 1/(2*m) * sum(sqrErrors);
 
 % =========================================================================
 
