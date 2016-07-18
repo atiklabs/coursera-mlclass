@@ -32,7 +32,7 @@ h = sigmoid(X*theta);
 J = -sum(y.*log(h) + (1 - y).*log(1 - h))/m;
 
 % === Option 1: Iterative ===
-% for j = size(grad)
+% for j = 1:size(grad)
 %   for i = 1:m
 %     grad(j) += (sigmoid(X(i, :)*theta) - y(i))*X(i, j);
 %   end
