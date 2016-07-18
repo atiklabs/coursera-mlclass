@@ -40,12 +40,7 @@ J = -sum(y.*log(h) + (1 - y).*log(1 - h))/m;
 % end
 
 % === Option 2: Vectorized ===
-for j = size(grad)
-  for i = 1:m
-    grad(j) += (sigmoid(X(i, :)*theta) - y(i))*X(i, j);
-  end
-  grad(j) = 1/m*grad(j);
-end
+grad = sum((h - y).*X)./m;
 
 % =============================================================
 
