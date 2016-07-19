@@ -30,14 +30,18 @@ X = [ones(m, 1) X];
 %       for each row.
 %
 
-for i = 1:m
-  search_max = zeros(num_labels, 1);
-  for j = 1:num_labels
-    search_max(j) = all_theta(j, :)*transpose(X(i, :));
-  end
-  [x, ix] = max(search_max);
-  p(i) = ix;
-end
+% === Option 1: Iterative ===
+% for i = 1:m
+%   search_max = zeros(num_labels, 1);
+%   for j = 1:num_labels
+%     search_max(j) = all_theta(j, :)*transpose(X(i, :));
+%   end
+%   [x, ix] = max(search_max);
+%   p(i) = ix;
+% end
+
+% === Option 2: Vectorized ===
+[x, p] = max(X*all_theta', [], 2);
 
 % =========================================================================
 
