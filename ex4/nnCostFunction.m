@@ -86,8 +86,9 @@ for i = 1:m
   a1 = transpose(X(i, :));
   a1 = [1 ; a1]; % add bias
   z2 = Theta1 * a1;
-  z2 = [1 ; z2]; % add bias
   a2 = sigmoid(z2);
+  z2 = [1 ; z2]; % add bias
+  a2 = [1 ; a2]; % add bias
   z3 = Theta2 * a2;
   a3 = sigmoid(z3);
 
@@ -99,16 +100,14 @@ for i = 1:m
   d2 = d2(2:end);
 
   % Step 4: Accumulate the gradient
-  Theta2_grad = Theta2_grad + d3*a2';
   Theta1_grad = Theta1_grad + d2*a1';
-
-  break;
+  Theta2_grad = Theta2_grad + d3*a2';
 
 end
 
 % Step 5: Divide accumulated gradients by m
-Theta2_grad = Theta2_grad/m;
-Theta1_grad = Theta1_grad/m;
+Theta1_grad = (1/m)*Theta1_grad;
+Theta2_grad = (1/m)*Theta2_grad;
 
 % =========================================================================
 
