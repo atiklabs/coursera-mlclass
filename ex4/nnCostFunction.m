@@ -62,6 +62,8 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% === Compute cost J ===
+
 % Compute new Y , as a matrix of 0 and 1
 Y = zeros(m, num_labels);
 for i = 1:m
@@ -78,7 +80,7 @@ J = -sum(sum(Y.*log(h) + (1 - Y).*log(1 - h)))/m;
 % Add regularization to J
 J = J + lambda/(2*m)*(sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)));
 
-% -------------------------------------------------------------
+% === Use backpropagation to compute gradient
 
 for i = 1:m
 
@@ -108,6 +110,10 @@ end
 % Step 5: Divide accumulated gradients by m
 Theta1_grad = (1/m)*Theta1_grad;
 Theta2_grad = (1/m)*Theta2_grad;
+
+% Step 6: Regularization
+Theta1_grad(:, 2:end) = Theta1_grad(:, 2:end) + (lambda/m)*Theta1(:, 2:end);
+Theta2_grad(:, 2:end) = Theta2_grad(:, 2:end) + (lambda/m)*Theta2(:, 2:end);
 
 % =========================================================================
 
