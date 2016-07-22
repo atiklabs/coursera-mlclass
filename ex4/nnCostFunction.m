@@ -80,7 +80,7 @@ J = -sum(sum(Y.*log(h) + (1 - Y).*log(1 - h)))/m;
 % Add regularization to J
 J = J + lambda/(2*m)*(sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)));
 
-% === Use backpropagation to compute gradient
+% === Use backpropagation to compute gradient ===
 
 for i = 1:m
 
