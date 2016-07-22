@@ -87,7 +87,6 @@ for i = 1:m
   a1 = [1 ; a1]; % add bias
   z2 = Theta1 * a1;
   a2 = sigmoid(z2);
-  z2 = [1 ; z2]; % add bias
   a2 = [1 ; a2]; % add bias
   z3 = Theta2 * a2;
   a3 = sigmoid(z3);
@@ -96,6 +95,7 @@ for i = 1:m
   d3 = a3 - transpose(Y(i, :));
 
   % Step 3: Calculate "error" in layer 2
+  z2 = [1 ; z2]; % add bias
   d2 = Theta2'*d3 .* sigmoidGradient(z2);
   d2 = d2(2:end);
 
