@@ -76,9 +76,39 @@ h = sigmoid([ones(m, 1) h] * Theta2');
 J = -sum(sum(Y.*log(h) + (1 - Y).*log(1 - h)))/m;
 
 % Add regularization to J
-J = J + lambda/(2*m)*(sum(sum(Theta1(:, 2:(input_layer_size + 1)).^2)) + sum(sum(Theta2(:, 2:(hidden_layer_size + 1)).^2)));
+J = J + lambda/(2*m)*(sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)));
 
 % -------------------------------------------------------------
+
+for i = 1:m
+
+  % Step 1: Perform feedforward
+  a1 = transpose(X(i, :));
+  a1 = [1 ; a1]; % add bias
+  z2 = Theta1 * a1;
+  z2 = [1 ; z2]; % add bias
+  a2 = sigmoid(z2);
+  z3 = Theta2 * a2;
+  a3 = sigmoid(z3);
+
+  % Step 2: Calculate "error" in layer 3
+  d3 = a3 - transpose(Y(i, :));
+
+  % Step 3: Calculate "error" in layer 2
+  d2 = Theta2'*d3 .* sigmoidGradient(z2);
+  d2 = d2(2:end);
+
+  % Step 4: Accumulate the gradient
+  Theta2_grad = Theta2_grad + d3*a2';
+  Theta1_grad = Theta1_grad + d2*a1';
+
+  break;
+
+end
+
+% Step 5: Divide accumulated gradients by m
+Theta2_grad = Theta2_grad/m;
+Theta1_grad = Theta1_grad/m;
 
 % =========================================================================
 
