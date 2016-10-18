@@ -21,7 +21,7 @@ n = size(theta);
 
 [J, grad] = costFunction(theta, X, y);
 J = J + lambda/(2*m)*sum(theta(2:n).^2);
-grad(2:n) = grad(2:n)+ transpose(lambda/m*theta(2:n));
+grad(2:n) = grad(2:n) + transpose(lambda/m*theta(2:n));
 
 % =============================================================
 
