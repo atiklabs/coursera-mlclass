@@ -218,3 +218,14 @@ end
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
+
+%% === Part 9: Optional Ungraded Exercices
+
+[_, ix] = min(error_val);
+lambda = lambda_vec(ix);
+fprintf('Choosing automatically lambda %f for computing test error.\n', lambda);
+
+theta = trainLinearReg(X_poly, y, lambda);
+[error_val, _] = linearRegCostFunction(X_poly_test, ytest, theta, 0);
+
+fprintf('Result: test error of %f.\n', error_val);
