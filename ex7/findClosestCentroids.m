@@ -22,10 +22,8 @@ idx = zeros(size(X,1), 1);
 %
 
 for i = 1:size(X, 1)
-  distances = zeros(K, 1);
-  for j = 1:K
-    distances(j) = sum((X(i, :) - centroids(j, :)).^2);
-  end
+  X_rep = repmat(X(i, :), K, 1);
+  distances = sum((X_rep - centroids).^2, 2);
   [_, idx(i)] = min(distances);
 end
 
